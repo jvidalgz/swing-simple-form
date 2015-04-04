@@ -96,13 +96,31 @@ public class Formulario extends JFrame{
                     persona.setNombre(text1.getText());
                     persona.setApellidoPaterno(text2.getText());
                     persona.setApellidoMaterno(text3.getText());
-                    persona.setEdad(Integer.parseInt(text4.getText()));
-                    persona.setNota(Integer.parseInt(text5.getText()));
+
+                    /**
+                     * se aisla el ingreso de la edad en un método. Agrega try/catch para cuando se arroge una excepción,
+                     * el error sea mostrado apropiadamente y el programa no termine abruptamente
+                     */
+                    try {
+                        personaSetEdad(persona, text4);
+                    } catch (NumberFormatException e1) {
+                        System.out.println("El valor ingresado en la edad no es correcto!");
+                    }
+                    /**
+                     * se aisla el ingreso de la nota en un método. Agrega try/catch para cuando se arroge una excepción,
+                     * el error sea mostrado apropiadamente y el programa no termine abruptamente
+                     */
+
+                    try {
+                        personaSetNota(persona, text5);
+                    } catch (NumberFormatException e1) {
+                        System.out.println("El valor ingresado en la nota es incorrecto");
+                    }
 
                     System.out.println("Los datos ingresados de la persona son: ");
                     System.out.println("Nombre: "           + persona.getNombre());
                     System.out.println("Apellido paterno: " + persona.getApellidoPaterno());
-                    System.out.println("Apellido materno: " + persona.getApellidoPaterno());
+                    System.out.println("Apellido materno: " + persona.getApellidoMaterno());
                     System.out.println("Edad: "             + persona.getEdad());
                     System.out.println("Nota: "             + persona.getNota());
                 }
@@ -119,4 +137,28 @@ public class Formulario extends JFrame{
         });
 
             } // fin constructor
-        }// fin clase
+
+    /**
+     * Método para establecer la edad en el (objeto) persona. La edad será ingresada desde un Textfield
+     * @param persona
+     * @param text5
+     * @throws NumberFormatException
+     */
+
+    private static void personaSetNota(Persona persona, JTextField text5)
+            throws NumberFormatException{
+        persona.setNota(Integer.parseInt(text5.getText()));
+    }
+
+    /**
+     * Método para establecer nota en el (objeto) persona. La edad será ingresada desde un Textfield
+     * @param persona
+     * @param text4
+     * @throws NumberFormatException
+     */
+
+    private static void personaSetEdad(Persona persona, JTextField text4)
+            throws NumberFormatException{
+        persona.setEdad(Integer.parseInt(text4.getText()));
+    }
+}// fin clase
